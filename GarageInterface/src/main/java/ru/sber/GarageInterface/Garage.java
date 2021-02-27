@@ -1,3 +1,6 @@
+package ru.sber.GarageInterface;
+
+
 import java.util.Collection;
 
 public interface Garage {

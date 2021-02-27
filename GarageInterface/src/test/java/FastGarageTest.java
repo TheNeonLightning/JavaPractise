@@ -2,6 +2,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ru.sber.GarageInterface.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;

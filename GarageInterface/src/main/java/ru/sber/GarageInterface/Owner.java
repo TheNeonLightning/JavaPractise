@@ -1,3 +1,6 @@
+package ru.sber.GarageInterface;
+
+
 import java.util.Objects;
 
 public class Owner {
