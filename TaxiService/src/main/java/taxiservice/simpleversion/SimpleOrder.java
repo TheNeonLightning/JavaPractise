@@ -1,6 +1,6 @@
-package taxi_service.simple_version;
+package taxiservice.simpleversion;
 
-import taxi_service.Order;
+import taxiservice.Order;
 
 import java.util.concurrent.ThreadLocalRandom;
 

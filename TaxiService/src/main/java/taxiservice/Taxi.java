@@ -1,6 +1,4 @@
-package taxi_service;
-
-import taxi_service.simple_version.SimpleOrder;
+package taxiservice;
 
 public interface Taxi extends Runnable {
     void run();

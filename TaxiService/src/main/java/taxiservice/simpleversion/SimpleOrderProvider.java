@@ -1,7 +1,6 @@
-package taxi_service.simple_version;
+package taxiservice.simpleversion;
 
-import taxi_service.Order;
-import taxi_service.OrderProvider;
+import taxiservice.OrderProvider;
 
 public class SimpleOrderProvider implements OrderProvider {
 

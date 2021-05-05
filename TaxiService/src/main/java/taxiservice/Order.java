@@ -1,4 +1,4 @@
-package taxi_service;
+package taxiservice;
 
 public interface Order {
     void processOrder();

@@ -1,8 +1,8 @@
-import taxi_service.TaxiService;
-import taxi_service.simple_version.SimpleDispatcher;
-import taxi_service.simple_version.SimpleOrderProvider;
-import taxi_service.simple_version.SimpleTaxi;
-import taxi_service.simple_version.SimpleTaxiService;
+import taxiservice.TaxiService;
+import taxiservice.simpleversion.SimpleDispatcher;
+import taxiservice.simpleversion.SimpleOrderProvider;
+import taxiservice.simpleversion.SimpleTaxi;
+import taxiservice.simpleversion.SimpleTaxiService;
 
 public class Application {
 

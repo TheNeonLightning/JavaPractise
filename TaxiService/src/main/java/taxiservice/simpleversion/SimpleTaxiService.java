@@ -1,7 +1,7 @@
-package taxi_service.simple_version;
+package taxiservice.simpleversion;
 
-import taxi_service.Taxi;
-import taxi_service.TaxiService;
+import taxiservice.Taxi;
+import taxiservice.TaxiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,11 @@ public class SimpleTaxiService implements TaxiService {
 
     public void addTaxi(Taxi taxi) {
         taxis.add(taxi);
-        dispatcher.addAvailableTaxi(taxi);
+        dispatcher.notifyAvailable(taxi);
     }
 
     public void startOperating() {
-
         new Thread(dispatcher).start();
-
 
         for (Taxi taxi : taxis) {
             new Thread(taxi).start();
@@ -36,5 +34,4 @@ public class SimpleTaxiService implements TaxiService {
             taxi.gracefulStop();
         }
     }
-
 }

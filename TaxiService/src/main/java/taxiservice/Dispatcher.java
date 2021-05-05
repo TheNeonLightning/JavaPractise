@@ -1,4 +1,4 @@
-package taxi_service;
+package taxiservice;
 
 public interface Dispatcher extends Runnable {
     void notifyAvailable(Taxi taxi);

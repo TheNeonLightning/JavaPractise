@@ -1,7 +1,5 @@
-package taxi_service;
+package taxiservice;
 
 public interface OrderProvider {
-
     Order provideOrder();
-
 }

@@ -1,7 +1,7 @@
-package taxi_service.simple_version;
+package taxiservice.simpleversion;
 
-import taxi_service.Order;
-import taxi_service.Taxi;
+import taxiservice.Order;
+import taxiservice.Taxi;
 
 public class SimpleTaxi implements Taxi {
 
@@ -21,23 +21,21 @@ public class SimpleTaxi implements Taxi {
     @Override
     public void run() {
 
-        operating:
         while (keepOperating) {
-
-            dispatcher.addAvailableTaxi(this);
+            dispatcher.notifyAvailable(this);
 
             synchronized (this) {
                 while (currentOrder == null) {
                     if (keepOperating) {
                         doWait();
                     } else {
-                        break operating; // using label only to print
-                                         // stopped taxi id in any stop scenario
+                        break;
                     }
                 }
             }
-
-            processOrder();
+            if (currentOrder != null) { // if currentOrder is null
+                processOrder();         // then graceful stop was called
+            }
         }
         System.out.println("Taxi " + id + " stopped");
     }
@@ -45,14 +43,14 @@ public class SimpleTaxi implements Taxi {
     @Override
     public synchronized void placeOrder(Order order) {
         currentOrder = order;
-        notify();
+        notifyAll();
     }
 
     @Override
     public synchronized void gracefulStop() {
         this.keepOperating = false;
-        notify(); // notifying so would stop waiting for new taxis to arrive
-                  // in getAvailableTaxi() method
+        notifyAll(); // notifying so would stop waiting for new taxis to arrive
+                     // in getAvailableTaxi() method
     }
 
     private void doWait() {
@@ -62,7 +60,7 @@ public class SimpleTaxi implements Taxi {
         }
     }
 
-    private void processOrder() {
+    private synchronized void processOrder() {
         currentOrder.processOrder();
         currentOrder = null;
     }

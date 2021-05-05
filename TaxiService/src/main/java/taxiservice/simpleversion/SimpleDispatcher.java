@@ -1,8 +1,8 @@
-package taxi_service.simple_version;
+package taxiservice.simpleversion;
 
-import taxi_service.Dispatcher;
-import taxi_service.OrderProvider;
-import taxi_service.Taxi;
+import taxiservice.Dispatcher;
+import taxiservice.OrderProvider;
+import taxiservice.Taxi;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -21,39 +21,25 @@ public class SimpleDispatcher implements Dispatcher {
     public void run() {
         while (keepOperating) {
             Taxi currentTaxi = getAvailableTaxi();
-
             if (currentTaxi == null) {
                 break;
             }
-
             currentTaxi.placeOrder(orderProvider.provideOrder());
-
         }
         System.out.println("Dispatcher stopped");
     }
 
-
-    // Not using this method (notifying taxi in placeOrder() method of taxi)
     @Override
-    public void notifyAvailable(Taxi taxi) {
-        if (taxi == null) {
-            throw new IllegalArgumentException("Notified taxi is a null pointer");
-        }
-        synchronized (taxi) {
-            taxi.notify();
-        }
+    public synchronized void notifyAvailable(Taxi taxi) {
+        taxiQueue.add(taxi);
+        notifyAll();
     }
 
     @Override
     public synchronized void gracefulStop() {
         this.keepOperating = false;
-        notify(); // notifying so would stop waiting for new taxis to arrive
-                  // in getAvailableTaxi() method
-    }
-
-    public synchronized void addAvailableTaxi(Taxi taxi) {
-        taxiQueue.add(taxi);
-        notify();
+        notifyAll(); // notifying so would stop waiting for new taxis to arrive
+                     // in getAvailableTaxi() method
     }
 
     /**
