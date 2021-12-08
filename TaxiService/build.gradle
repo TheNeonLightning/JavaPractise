@@ -1,5 +1,18 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.qameta.allure.gradle.allure:allure-plugin:2.9.6"
+    }
+}
+
+
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.9.6"
 }
 
 group 'org.example'
@@ -14,6 +27,9 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testCompile "junit:junit:4.12"
 }
+
+
+apply plugin: "io.qameta.allure"
 
 test {
     useJUnitPlatform()
